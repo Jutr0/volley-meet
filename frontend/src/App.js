@@ -1,25 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import Layout from "./components/layout/Layout";
+import AuthorizedRoutes from "./components/common/routes/AuthorizedRoutes";
+import UnauthorizedRoutes from "./components/common/routes/UnauthorizedRoutes";
+import {AuthContext} from "./contexts/AuthContext";
+import {useContext} from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const {currentUser} = useContext(AuthContext);
+
+    return (
+        <Layout>
+            {currentUser ? <AuthorizedRoutes/> : <UnauthorizedRoutes/>}
+        </Layout>
+    );
 }
 
 export default App;
