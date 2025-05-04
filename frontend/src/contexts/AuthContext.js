@@ -15,7 +15,12 @@ const AuthProvider = ({children}) => {
                 user: credentials
             }
         }),
-        signUp: (credentials) => save('/users', 'POST', {user: credentials}),
+        signUp: (credentials) =>  axios.request({
+            url: '/users', method: 'POST',
+            data: {
+                user: credentials
+            }
+        }),
         signOut: () => save('/users/sign_out', 'DELETE')
     }
 
@@ -46,8 +51,8 @@ const AuthProvider = ({children}) => {
 
     const register = async (credentials) => {
         const response = await actions.signUp(credentials);
-        setToken(response.token);
-        setCurrentUser(response.user);
+        setToken(response.headers.authorization.split(' ')[1]);
+        setCurrentUser(response.data.user);
     };
 
     const logout = async () => {

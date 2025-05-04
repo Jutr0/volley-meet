@@ -19,6 +19,13 @@ const UnauthorizedLinks = () => {
         >
             Login
         </Button>
+        <Button
+            color="inherit"
+            component={NavLink}
+            to="/register"
+        >
+            Register
+        </Button>
     </>
 }
 
