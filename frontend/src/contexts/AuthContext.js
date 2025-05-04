@@ -1,5 +1,6 @@
 import React, {createContext, useEffect, useState} from 'react';
 import {get, save} from "../utils/actionsBuilder";
+import axios from "axios";
 
 export const AuthContext = createContext();
 
@@ -8,8 +9,16 @@ const AuthProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState(null);
     const actions = {
         getUser: () => get('/users/me'),
-        signIn: (credentials) => save('/users/me', 'POST', {credentials}),
+        signIn: (credentials) => axios.request({
+            url: '/users/sign_in', method: 'POST',
+            data: {
+                user: credentials
+            }
+        }),
+        signUp: (credentials) => save('/users', 'POST', {user: credentials}),
+        signOut: () => save('/users/sign_out', 'DELETE')
     }
+
     useEffect(() => {
         if (token) {
             localStorage.setItem('token', token);
@@ -30,14 +39,23 @@ const AuthProvider = ({children}) => {
     };
 
     const login = async (credentials) => {
-        const token = await actions.signIn(credentials);
-        setToken(token);
+        const response = await actions.signIn(credentials);
+        setToken(response.headers.authorization.split(' ')[1]);
+        setCurrentUser(response.data.user);
     };
 
-    const logout = () => setToken(null);
+    const register = async (credentials) => {
+        const response = await actions.signUp(credentials);
+        setToken(response.token);
+        setCurrentUser(response.user);
+    };
 
+    const logout = async () => {
+        await actions.signOut();
+        setToken(null);
+    };
     return (
-        <AuthContext.Provider value={{currentUser, login, logout}}>
+        <AuthContext.Provider value={{currentUser, login, logout, register}}>
             {children}
         </AuthContext.Provider>
     );

@@ -1,12 +1,12 @@
 import React from 'react';
 import {useFormik} from "formik";
 import * as Yup from "yup";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import FormInput from "../common/form/FormInput";
 import FormSelect from "../common/form/FormSelect";
 import FormDatePicker from "../common/form/FormDatePicker";
 import FormCheckbox from "../common/form/FormCheckbox";
+import Button from "../common/Button";
 
 const validationSchema = Yup.object({
     name: Yup.string().required('Required'),

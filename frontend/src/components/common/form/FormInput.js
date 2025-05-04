@@ -1,6 +1,6 @@
 import {TextField} from "@mui/material";
 
-const FormInput = ({name, label, formik}) => {
+const FormInput = ({name, label, formik, type}) => {
 
     return <TextField
         id={name}
@@ -13,6 +13,7 @@ const FormInput = ({name, label, formik}) => {
         helperText={formik.touched[name] && formik.errors[name]}
         sx={{mb: 2}}
         fullWidth
+        type={type}
     />
 };
 
