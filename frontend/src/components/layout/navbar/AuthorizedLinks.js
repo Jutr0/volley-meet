@@ -2,10 +2,16 @@ import Button from "../../common/Button";
 import {NavLink, useNavigate} from "react-router-dom";
 import React, {useContext} from "react";
 import {AuthContext} from "../../../contexts/AuthContext";
+import {ROLES} from "../../../utils/constants";
+
+const links = [
+    {path: '/', label: 'Home', roles: 'all'},
+    {path: '/users', label: 'Users', roles: [ROLES.SUPERADMIN]},
+]
 
 const AuthorizedLinks = () => {
 
-    const {logout} = useContext(AuthContext);
+    const {logout, currentUser} = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleLogout = async () => {
@@ -13,14 +19,16 @@ const AuthorizedLinks = () => {
         navigate("/login")
     }
 
+    const currentUserLinks = links.filter(link => link.roles === 'all' || link.roles.includes(currentUser.role));
+
     return <>
-        <Button
+        {currentUserLinks.map(link => <Button
             color="inherit"
             component={NavLink}
-            to="/"
+            to={link.path}
         >
-            Home
-        </Button>
+            {link.label}
+        </Button>)}
         <Button
             color="inherit"
             onClick={handleLogout}

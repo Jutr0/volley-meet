@@ -8,7 +8,7 @@ const AuthProvider = ({children}) => {
     const [token, setToken] = useState(() => localStorage.getItem('token'));
     const [currentUser, setCurrentUser] = useState(null);
     const actions = {
-        getUser: () => get('/users/me'),
+        getUser: () => get('/profile/me'),
         signIn: (credentials) => axios.request({
             url: '/users/sign_in', method: 'POST',
             data: {

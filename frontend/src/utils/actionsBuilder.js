@@ -47,10 +47,10 @@ export const buildActions = (resourceName, url) => {
         }
         return save(apiUrl, method, {[resourceName]: resource})
     }
-    const removeResource = (resource) => {
+    const deleteResource = (resource) => {
         apiUrl += `/${resource.id}`
         return remove(apiUrl)
     }
 
-    return {getAll, getOne, save: saveResource, remove: removeResource}
+    return {getAll, getOne, save: saveResource, delete: deleteResource}
 }

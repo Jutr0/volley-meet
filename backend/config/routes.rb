@@ -7,8 +7,9 @@ Rails.application.routes.draw do
                  registrations: 'users/registrations'
                }
 
-    resource :users, only: [] do
-      get :me, to: 'users#me'
-    end
+    resources :users, except: [:create]
+    post '/users/create', to: 'users#create'
+
+    get '/profile/me', to: 'profile#me'
   end
 end

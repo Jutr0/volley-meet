@@ -5,6 +5,7 @@ class ApplicationController < ActionController::API
   rescue_from Exception, with: :handle_exception
   rescue_from ActiveRecord::RecordNotFound, with: :handle_not_found_exception
   rescue_from ActiveRecord::RecordInvalid, with: :handle_validation_exception
+  rescue_from CanCan::AccessDenied, with: :handle_access_denied_exception
 
   private
 
@@ -25,9 +26,14 @@ class ApplicationController < ActionController::API
 
     render json: { message: "Validation failed" }, status: :unprocessable_entity
   end
+  def handle_access_denied_exception(exception)
+    log_error(exception)
+
+    render json: { message: "Not authorized" }, status: :unauthorized
+  end
 
   def log_error(exception)
     Rails.logger.error "#{exception.class}: #{exception.message}"
-    Rails.logger.error exception.backtrace.join("\n") if exception.backtrace
+    Rails.logger.error exception.backtrace.select { |path| !path.include?('/gems/') }.join("\n") if exception.backtrace
   end
 end
