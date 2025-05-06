@@ -21,6 +21,11 @@ const Navbar = () => {
                 <Box>
                     {currentUser ? <AuthorizedLinks/> : <UnauthorizedLinks/>}
                 </Box>
+                {currentUser &&
+                    <Typography variant="caption" component="div" sx={{ml: 2}}>
+                        {currentUser.email}
+                    </Typography>
+                }
             </Toolbar>
         </AppBar>
     );

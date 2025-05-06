@@ -16,7 +16,13 @@ const Login = () => {
             await login({email, password})
             navigate("/")
         } catch (e) {
-            console.log(e)
+
+            if (e.status === 401) {
+                formik.setErrors({password: 'Invalid Email or Password', email: true})
+            } else {
+                throw e;
+            }
+
         }
     }
 

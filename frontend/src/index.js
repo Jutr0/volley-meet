@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 axios.defaults.baseURL = appConfig.apiUrl
 axios.defaults.headers.common['Content-Type'] = 'application/json'
-axios.defaults.headers.common['Accept']       = 'application/json'
+axios.defaults.headers.common['Accept'] = 'application/json'
 
 axios.interceptors.request.use(cfg => {
     const token = localStorage.getItem('token');
@@ -29,7 +29,9 @@ axios.interceptors.response.use(
     err => {
         if (err.response?.status === 401) {
             localStorage.removeItem('token');
-            window.location.href = '/login';
+            if (window.location.pathname !== '/login') {
+                window.location.href = '/login';
+            }
         }
         return Promise.reject(err);
     }

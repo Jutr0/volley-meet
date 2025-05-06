@@ -5,6 +5,19 @@ import Button from "../common/Button";
 import {useContext} from "react";
 import {AuthContext} from "../../contexts/AuthContext";
 import {useNavigate} from "react-router-dom";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object({
+    email: Yup.string()
+        .email('Invalid email format')
+        .required('Email is required'),
+    password: Yup.string()
+        .min(8, 'Password must be at least 8 characters')
+        .required('Password is required'),
+    password_confirmation: Yup.string()
+        .oneOf([Yup.ref('password'), null], 'Passwords must match')
+        .required('Password confirmation is required')
+})
 
 const Register = () => {
 
@@ -16,12 +29,17 @@ const Register = () => {
             await register({email, password, password_confirmation})
             navigate("/")
         } catch (e) {
-            console.log(e)
+            if (e.response.data?.errors?.includes("Email has already been taken")) {
+                formik.setErrors({email: 'Email has already been taken'})
+            } else {
+                throw e;
+            }
         }
     }
 
     const formik = useFormik({
         initialValues: {email: '', password: ''},
+        validationSchema,
         onSubmit: values => {
             handleRegister(values.email, values.password, values.password_confirmation)
         }
