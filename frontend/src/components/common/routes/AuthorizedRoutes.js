@@ -4,10 +4,14 @@ import {useContext} from "react";
 import {AuthContext} from "../../../contexts/AuthContext";
 import {ROLES} from "../../../utils/constants";
 import Users from "../../pages/Users";
+import Teams from "../../pages/teams/Teams";
+import Team from "../../pages/teams/Team";
 
 const routes = [
     {path: '/', component: <Home/>, roles: 'all'},
-    {path: '/users', component: <Users/>, roles: [ROLES.SUPERADMIN]}
+    {path: '/users', component: <Users/>, roles: [ROLES.SUPERADMIN]},
+    {path: '/teams', component: <Teams/>, roles: [ROLES.SUPERADMIN]},
+    {path: '/teams/:id', component: <Team/>, roles: [ROLES.SUPERADMIN]}
 ]
 
 const AuthorizedRoutes = () => {

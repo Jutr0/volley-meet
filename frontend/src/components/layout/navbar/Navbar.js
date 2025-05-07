@@ -15,7 +15,7 @@ const Navbar = () => {
         <AppBar position="static">
             <Toolbar>
                 <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                    APP TITLE
+                    Volley Meet
                 </Typography>
 
                 <Box>

@@ -21,6 +21,10 @@ class UsersController < ApplicationController
     @user.destroy!
   end
 
+  def search
+    @users = @users.where("email LIKE ?", "%#{params[:query]}%").limit(10)
+  end
+
   private
 
   def user_params

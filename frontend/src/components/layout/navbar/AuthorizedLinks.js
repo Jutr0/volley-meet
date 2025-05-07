@@ -7,6 +7,7 @@ import {ROLES} from "../../../utils/constants";
 const links = [
     {path: '/', label: 'Home', roles: 'all'},
     {path: '/users', label: 'Users', roles: [ROLES.SUPERADMIN]},
+    {path: '/teams', label: 'Teams', roles: [ROLES.SUPERADMIN]}
 ]
 
 const AuthorizedLinks = () => {
