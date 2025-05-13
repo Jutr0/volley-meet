@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {Box, Button, Typography} from '@mui/material';
+import {Box, Button} from '@mui/material';
 import Table from '../../common/Table';
 import {buildActions} from "../../../utils/actionsBuilder";
 import {useNavigate} from "react-router-dom";
+import Card from "../../common/Card";
 
 const columns = [
     {field: 'name', headerName: 'Team Name', width: 250},
@@ -32,34 +33,32 @@ const Teams = () => {
     };
 
     const handleDelete = (id) => {
-        actions.delete({id})
+        actions.delete({id}).then(() => setTeams(teams.filter(team => team.id !== id)))
     };
 
 
     return (
-        <Box sx={{width: '100%', padding: 2}}>
+        <Card title="Teams" buttons={
+            <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                onClick={handleAddNew}
+            >
+                + Create
+            </Button>}>
             <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2}}>
-                <Typography variant="h4" component="h1">
-                    Teams Management
-                </Typography>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleAddNew}
-                >
-                    Add New Team
-                </Button>
+
             </Box>
 
             <Table
                 data={teams}
                 columns={columns}
                 loading={loading}
-                getRowId={(row) => row.id}
                 onEdit={handleEdit}
                 onDelete={handleDelete}
             />
-        </Box>
+        </Card>
     );
 };
 

@@ -19,4 +19,9 @@
 #
 class Team < ApplicationRecord
   belongs_to :captain, class_name: "User"
+  has_many :team_memberships, dependent: :destroy
+  has_many :members, through: :team_memberships, source: :user
+
+  accepts_nested_attributes_for :team_memberships, allow_destroy: true
+
 end

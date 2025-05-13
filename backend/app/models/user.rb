@@ -5,7 +5,10 @@
 #  id                 :uuid             not null, primary key
 #  email              :string           not null
 #  encrypted_password :string           not null
+#  name               :string           not null
+#  nickname           :string
 #  role               :string           not null
+#  surname            :string           not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
@@ -21,7 +24,9 @@ class User < ApplicationRecord
          jwt_revocation_strategy: JwtDenylist
 
   enum :role, { user: 'user', superadmin: 'superadmin', guest: 'guest' }, default: :user
-
   validates :password_confirmation, presence: true, on: :create
+
+  has_one :team_membership, dependent: :destroy
+  has_one :team, through: :team_membership
 
 end

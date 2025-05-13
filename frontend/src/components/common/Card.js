@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import {Card as MUICard, CardContent, Stack} from "@mui/material";
 import Button from "./Button";
 
-const Card = ({children, onDelete, onSave, title}) => {
+const Card = ({children, onDelete, onSave, title, buttons}) => {
     return <MUICard sx={{mx: 'auto'}}>
         <Box
             sx={{
@@ -34,6 +34,7 @@ const Card = ({children, onDelete, onSave, title}) => {
                 >
                     Save
                 </Button>}
+                {buttons}
             </Stack>
         </Box>
 

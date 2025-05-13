@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import AuthorizedLinks from "./AuthorizedLinks";
 import UnauthorizedLinks from "./UnauthorizedLinks";
 import {AuthContext} from "../../../contexts/AuthContext";
+import {formatUserName} from "../../../utils/formatters/user";
 
 const Navbar = () => {
 
@@ -23,7 +24,7 @@ const Navbar = () => {
                 </Box>
                 {currentUser &&
                     <Typography variant="caption" component="div" sx={{ml: 2}}>
-                        {currentUser.email}
+                        {formatUserName(currentUser)}
                     </Typography>
                 }
             </Toolbar>

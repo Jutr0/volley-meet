@@ -12,16 +12,20 @@ import * as _ from 'lodash';
 const validationSchema = Yup.object({
     email: Yup.string()
         .email('Invalid email address')
-        .required('Email is required'),
+        .required('Required'),
+    name: Yup.string()
+        .required('Required'),
+    surname: Yup.string()
+        .required('Required'),
     role: Yup.string()
-        .required('Role is required'),
+        .required('Required'),
     change_password: Yup.boolean(),
     password: Yup.string()
         .min(8, 'Password must be at least 8 characters')
         .when(['id', 'change_password'], {
             is: (id, change_password) => id === undefined || change_password === true,
             then: schema =>
-                schema.required('Password is required'),
+                schema.required('Required'),
             otherwise: schema =>
                 schema.notRequired(),
         }),
@@ -30,7 +34,7 @@ const validationSchema = Yup.object({
         .when(['id', 'change_password'], {
             is: (id, change_password) => id === undefined || change_password === true,
             then: schema =>
-                schema.required('Password confirmation is required'),
+                schema.required('Required'),
             otherwise: schema =>
                 schema.notRequired(),
         }),
@@ -41,10 +45,7 @@ const UserModal = ({onClose, user, onSave}) => {
 
     const formik = useFormik({
         initialValues: {
-            id: user?.id || '',
-            email: user?.email || '',
-            role: user?.role || 'user',
-            password: ''
+            role: 'user', ...user
         },
         validationSchema,
         enableReinitialize: true,
@@ -67,6 +68,9 @@ const UserModal = ({onClose, user, onSave}) => {
             submitDisabled={formik.isSubmitting || !formik.isValid}
         >
             <Box component="form" onSubmit={formik.handleSubmit} sx={{mt: 2}}>
+                <FormInput name="name" label="Name" formik={formik}/>
+                <FormInput name="surname" label="Surname" formik={formik}/>
+                <FormInput name="nickname" label="Nickname" formik={formik}/>
                 <FormInput name="email" label="Email" type="email" formik={formik}/>
                 <FormSelect
                     name="role"

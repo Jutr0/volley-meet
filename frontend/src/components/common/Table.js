@@ -25,7 +25,8 @@ const Table = ({
                    onPageChange,
                    onRowsPerPageChange,
                    onEdit,
-                   onDelete
+                   onDelete,
+                   onAddNew
                }) => {
     const paginatedRows = pagination
         ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -114,6 +115,19 @@ const Table = ({
                                     )}
                                 </TableRow>
                             ))
+                        )}
+                        {onAddNew && (
+                            <TableRow
+                                hover
+                                onClick={onAddNew}
+                                sx={{cursor: 'pointer'}}
+                            >
+                                <TableCell colSpan={effectiveColSpan} sx={{py: 1}}>
+                                    <Box display="flex" justifyContent="center">
+                                        <Button> + Add new</Button>
+                                    </Box>
+                                </TableCell>
+                            </TableRow>
                         )}
                     </TableBody>
                 </MUITable>

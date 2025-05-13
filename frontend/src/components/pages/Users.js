@@ -1,11 +1,15 @@
 import Table from "../common/Table";
 import {buildActions, save} from "../../utils/actionsBuilder";
 import {useEffect, useState} from "react";
-import Box from "@mui/material/Box";
 import Button from "../common/Button";
 import UserModal from "../modals/UserModal";
+import Card from "../common/Card";
+import {formatUserName} from "../../utils/formatters/user";
 
 const columns = [
+    {
+        field: 'id', headerName: 'User', render: (_, user) => formatUserName(user)
+    },
     {field: 'email', headerName: 'Email'},
     {field: 'role', headerName: 'Role'}
 ]
@@ -44,10 +48,10 @@ const Users = () => {
     }
 
     return (
-        <Box sx={{display: 'flex', flexDirection: 'column', width: '100%'}}>
-            <Box sx={{display: 'flex', justifyContent: 'flex-end', mb: 2}}>
-                <Button variant="contained" onClick={() => setSelectedUser({})}>+ Add New</Button>
-            </Box>
+        <Card title="Users"
+              buttons={<Button size="small" variant="contained" onClick={() => setSelectedUser({})}>
+                  + Create
+              </Button>}>
             <Table
                 columns={columns}
                 data={users}
@@ -60,7 +64,7 @@ const Users = () => {
                 user={selectedUser}
                 onSave={handleSave}
             />}
-        </Box>
+        </Card>
     );
 }
 

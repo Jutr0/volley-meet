@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {Autocomplete, TextField} from '@mui/material';
-import {debounce} from 'lodash';
+import _, {debounce} from 'lodash';
 
 const FormAutocomplete = ({name, label, formik, search, labelField = 'name'}) => {
     const {
@@ -14,7 +14,6 @@ const FormAutocomplete = ({name, label, formik, search, labelField = 'name'}) =>
     const [inputValue, setInputValue] = useState('');
     const [options, setOptions] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
 
     const debouncedSearch = useCallback(
         debounce(async (query) => {
@@ -41,7 +40,6 @@ const FormAutocomplete = ({name, label, formik, search, labelField = 'name'}) =>
     };
 
     const handleChange = (event, newValue) => {
-        setSelectedOption(newValue);
         setFieldValue(name, newValue ? newValue : '');
     };
 
@@ -58,7 +56,7 @@ const FormAutocomplete = ({name, label, formik, search, labelField = 'name'}) =>
             id={name}
             options={options}
             loading={loading}
-            value={selectedOption}
+            value={_.get(values, name)}
             onChange={handleChange}
             inputValue={inputValue}
             onInputChange={handleInputChange}
@@ -72,7 +70,6 @@ const FormAutocomplete = ({name, label, formik, search, labelField = 'name'}) =>
                     error={Boolean(fieldError)}
                     helperText={fieldError}
                     onBlur={handleBlur}
-                    variant="outlined"
                     fullWidth
                 />
             )}

@@ -10,10 +10,14 @@ import * as Yup from "yup";
 const validationSchema = Yup.object({
     email: Yup.string()
         .email('Invalid email format')
-        .required('Email is required'),
+        .required('Required'),
+    name: Yup.string()
+        .required('Required'),
+    surname: Yup.string()
+        .required('Required'),
     password: Yup.string()
         .min(8, 'Password must be at least 8 characters')
-        .required('Password is required'),
+        .required('Required'),
     password_confirmation: Yup.string()
         .oneOf([Yup.ref('password'), null], 'Passwords must match')
         .required('Password confirmation is required')
@@ -24,9 +28,9 @@ const Register = () => {
     const {register} = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const handleRegister = async (email, password, password_confirmation) => {
+    const handleRegister = async (values) => {
         try {
-            await register({email, password, password_confirmation})
+            await register(values)
             navigate("/")
         } catch (e) {
             if (e.response.data?.errors?.includes("Email has already been taken")) {
@@ -40,12 +44,11 @@ const Register = () => {
     const formik = useFormik({
         initialValues: {email: '', password: ''},
         validationSchema,
-        onSubmit: values => {
-            handleRegister(values.email, values.password, values.password_confirmation)
-        }
-    })
+        onSubmit: handleRegister    })
 
     return <Box component="form" sx={{maxWidth: 400, mx: 'auto'}}>
+        <FormInput name="name" label="Name" formik={formik}/>
+        <FormInput name="surname" label="Surname" formik={formik}/>
         <FormInput name="email" label="Email" type="email" formik={formik}/>
         <FormInput name="password" label="Password" type="password" formik={formik}/>
         <FormInput name="password_confirmation" label="Password confirmation" type="password" formik={formik}/>
