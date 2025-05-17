@@ -26,13 +26,14 @@ const Table = ({
                    onRowsPerPageChange,
                    onEdit,
                    onDelete,
-                   onAddNew
+                   onAddNew,
+                   renderActions
                }) => {
     const paginatedRows = pagination
         ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
         : data;
 
-    const hasActions = onEdit || onDelete;
+    const hasActions = onEdit || onDelete || renderActions;
     const effectiveColSpan = hasActions ? columns.length + 1 : columns.length;
 
     const handleActionClick = (e, action, row) => {
@@ -95,7 +96,7 @@ const Table = ({
                                                     <Button
                                                         size="small"
                                                         color="primary"
-                                                        onClick={(e) => handleActionClick(e, () => onEdit(row), row)}
+                                                        onClick={(e) => handleActionClick(e, onEdit, row)}
                                                     >
                                                         Edit
                                                     </Button>
@@ -105,11 +106,12 @@ const Table = ({
                                                         size="small"
                                                         variant="contained"
                                                         color="error"
-                                                        onClick={(e) => handleActionClick(e, () => onDelete(row.id), row)}
+                                                        onClick={(e) => handleActionClick(e, onDelete, row)}
                                                     >
                                                         Delete
                                                     </Button>
                                                 )}
+                                                {renderActions && renderActions(row)}
                                             </Box>
                                         </TableCell>
                                     )}

@@ -8,7 +8,12 @@ class Ability
 
     if user.superadmin?
       can :manage, :all
-    else
+    end
+    if user.captain?
+      can :create, Invitation, team_id: user.team_membership.team_id
+    end
+    if user.user?
+      can [:read, :accept, :decline], Invitation, user_id: user.id
       can :read, User, id: user.id
       can :update, User, id: user.id
     end

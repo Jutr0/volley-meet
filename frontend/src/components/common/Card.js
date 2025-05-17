@@ -2,8 +2,9 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {Card as MUICard, CardContent, Stack} from "@mui/material";
 import Button from "./Button";
+import LoadingWrapper from "../layout/LoadingWrapper";
 
-const Card = ({children, onDelete, onSave, title, buttons}) => {
+const Card = ({children, onDelete, onSave, title, buttons, loading}) => {
     return <MUICard sx={{mx: 'auto'}}>
         <Box
             sx={{
@@ -37,10 +38,11 @@ const Card = ({children, onDelete, onSave, title, buttons}) => {
                 {buttons}
             </Stack>
         </Box>
-
-        <CardContent>
-            {children}
-        </CardContent>
+        <LoadingWrapper loading={loading}>
+            <CardContent>
+                {children}
+            </CardContent>
+        </LoadingWrapper>
     </MUICard>
 }
 

@@ -28,5 +28,14 @@ class User < ApplicationRecord
 
   has_one :team_membership, dependent: :destroy
   has_one :team, through: :team_membership
+  has_many :invitations, dependent: :destroy
+
+  def has_team?
+    team.present?
+  end
+
+  def captain?
+    has_team? && team.captain == self
+  end
 
 end

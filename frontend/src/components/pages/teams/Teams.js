@@ -25,15 +25,15 @@ const Teams = () => {
     }, []);
 
     const handleEdit = (team) => {
-        navigate(`/teams/${team.id}`)
+        navigate(`/superadmin/teams/${team.id}`)
     };
 
     const handleAddNew = () => {
-        navigate("/teams/new")
+        navigate("/superadmin/teams/new")
     };
 
-    const handleDelete = (id) => {
-        actions.delete({id}).then(() => setTeams(teams.filter(team => team.id !== id)))
+    const handleDelete = (team) => {
+        actions.delete(team).then(() => setTeams(teams.filter(t => t.id !== team.id)))
     };
 
 

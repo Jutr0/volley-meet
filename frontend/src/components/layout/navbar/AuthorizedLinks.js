@@ -5,9 +5,10 @@ import {AuthContext} from "../../../contexts/AuthContext";
 import {ROLES} from "../../../utils/constants";
 
 const links = [
-    {path: '/', label: 'Home', roles: 'all'},
-    {path: '/users', label: 'Users', roles: [ROLES.SUPERADMIN]},
-    {path: '/teams', label: 'Teams', roles: [ROLES.SUPERADMIN]}
+    {path: '/superadmin/users', label: 'Users', roles: [ROLES.SUPERADMIN]},
+    {path: '/superadmin/teams', label: 'Teams', roles: [ROLES.SUPERADMIN]},
+    {path: '/my-team', label: 'My Team', roles: [ROLES.USER]},
+    {path: '/invitations', label: 'Invitations', roles: [ROLES.USER]}
 ]
 
 const AuthorizedLinks = () => {

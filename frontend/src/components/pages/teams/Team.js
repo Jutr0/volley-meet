@@ -24,7 +24,7 @@ const validationSchema = Yup.object({
     captain: Yup.object().required('Required'),
 });
 
-const columns = [
+const membersColumns = [
     {
         field: 'id', headerName: 'User', render: (_, user) => formatUserName(user)
     },
@@ -48,7 +48,7 @@ const Team = () => {
             captain: null
         },
         validationSchema,
-        onSubmit: values => actions.save(toApi(values)).then(res => navigate(`/teams/${res.id}`))
+        onSubmit: values => actions.save(toApi(values)).then(res => navigate(`/superadmin/teams/${res.id}`))
     });
 
     useEffect(() => {
@@ -71,7 +71,7 @@ const Team = () => {
         <Typography>Members: </Typography>
         <Table
             data={formik.values.members || []}
-            columns={columns}
+            columns={membersColumns}
             loading={false}
         />
     </Card>

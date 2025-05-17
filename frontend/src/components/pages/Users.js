@@ -2,7 +2,7 @@ import Table from "../common/Table";
 import {buildActions, save} from "../../utils/actionsBuilder";
 import {useEffect, useState} from "react";
 import Button from "../common/Button";
-import UserModal from "../modals/UserModal";
+import UserModal from "../modals/users/UserModal";
 import Card from "../common/Card";
 import {formatUserName} from "../../utils/formatters/user";
 
@@ -32,8 +32,8 @@ const Users = () => {
         })
     }, []);
 
-    const handleDelete = (id) => {
-        actions.delete({id}).then(() => setUsers(users.filter(user => user.id !== id)))
+    const handleDelete = (user) => {
+        actions.delete(user).then(() => setUsers(users.filter(u => u.id !== user.id)))
     }
     const handleSave = (user) => {
         if (user.id) {

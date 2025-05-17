@@ -1,12 +1,12 @@
 import React from 'react';
-import Modal from '../common/Modal';
+import Modal from '../../common/modals/Modal';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
-import FormInput from "../common/form/FormInput";
-import FormSelect from "../common/form/FormSelect";
-import FormCheckbox from "../common/form/FormCheckbox";
+import FormInput from "../../common/form/FormInput";
+import FormSelect from "../../common/form/FormSelect";
+import FormCheckbox from "../../common/form/FormCheckbox";
 import Box from "@mui/material/Box";
-import {ROLES} from "../../utils/constants";
+import {ROLES} from "../../../utils/constants";
 import * as _ from 'lodash';
 
 const validationSchema = Yup.object({
