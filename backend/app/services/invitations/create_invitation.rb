@@ -13,6 +13,10 @@ module Invitations
         raise CustomException.new :user_email_not_found, "No user with email #{@user_email}", 404
       end
 
+      if user.team.present? && user.team == team
+        raise CustomException.new :user_already_member, "User #{user.username} is already a member of team #{team.name}", 409
+      end
+
       if Invitation.exists?(user:, team:, status: Invitation.statuses[:pending])
         raise CustomException.new :invitation_already_sent, "Invitation already pending for #{user.email}", 409
       end

@@ -24,6 +24,8 @@ const InvitationModal = ({onClose, onInvite, team}) => {
                 formik.setErrors({email: 'User with this email does not exist'})
             } else if (exception.response.data?.code === "invitation_already_sent") {
                 formik.setErrors({email: 'Invitation already sent to this user'})
+            } else if (exception.response.data?.code === "user_already_member") {
+                formik.setErrors({email: 'User is already member of this team'})
             } else {
                 throw exception;
             }

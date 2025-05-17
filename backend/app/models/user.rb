@@ -30,6 +30,10 @@ class User < ApplicationRecord
   has_one :team, through: :team_membership
   has_many :invitations, dependent: :destroy
 
+  def username
+    "#{name} #{nickname ? "'#{nickname}'" : ""} #{surname}"
+  end
+
   def has_team?
     team.present?
   end
