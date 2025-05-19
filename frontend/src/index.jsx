@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.scss';
+import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
@@ -9,8 +9,6 @@ import axios from "axios";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import AuthProvider from "./contexts/AuthContext";
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
 
 axios.defaults.baseURL = appConfig.apiUrl
 axios.defaults.headers.common['Content-Type'] = 'application/json'
@@ -36,6 +34,9 @@ axios.interceptors.response.use(
         return Promise.reject(err);
     }
 );
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <BrowserRouter>

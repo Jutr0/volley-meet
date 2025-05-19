@@ -1,7 +1,7 @@
 import {Route, Routes} from "react-router-dom";
 import {useContext} from "react";
-import {AuthContext} from "../../../contexts/AuthContext";
-import {ROLES} from "../../../utils/constants";
+import {AuthContext} from "@/contexts/AuthContext";
+import {ROLES} from "@/utils/constants";
 import Users from "../../pages/Users";
 import Teams from "../../pages/teams/Teams";
 import Team from "../../pages/teams/Team";

@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import {Box, Divider, Paper} from "@mui/material";
 import InfoItem from "../common/InfoItem";
 import ConfirmationModal from "../common/modals/ConfirmationModal";
-import Button from "../common/Button";
+import {Button} from "../ui/button"
 import InvitationModal from "../modals/myTeam/InvitationModal";
 import {AuthContext} from "../../contexts/AuthContext";
 
@@ -44,7 +44,7 @@ const MyTeam = () => {
     }, []);
 
     return <><Card title={team ? `My Team - ${team.name}` : 'My Team'} loading={loading}
-                   buttons={<><Button onClick={inviteMember}> Invite member</Button></>}>
+                   buttons={<><Button onClick={inviteMember} variant="ghost"> Invite member</Button></>}>
         {team && (
             <Box>
                 <Paper elevation={0} sx={{p: 2, mb: 3, bgcolor: 'background.paper', borderRadius: 1}}>
