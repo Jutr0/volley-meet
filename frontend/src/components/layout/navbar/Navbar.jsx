@@ -1,34 +1,34 @@
 import React, {useContext} from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import AuthorizedLinks from "./AuthorizedLinks";
 import UnauthorizedLinks from "./UnauthorizedLinks";
 import {AuthContext} from "../../../contexts/AuthContext";
 import {formatUserName} from "../../../utils/formatters/user";
 
 const Navbar = () => {
-
     const {currentUser} = useContext(AuthContext);
 
     return (
-        <AppBar position="static">
-            <Toolbar>
-                <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                    Volley Meet
-                </Typography>
+        <div className="bg-primary h-16 flex items-center px-4">
+            <div className="container mx-auto flex items-center justify-between">
+                <div className="flex items-center">
+          <span className="text-xl font-semibold text-primary-foreground">
+            Volley Meet
+          </span>
+                </div>
 
-                <Box>
-                    {currentUser ? <AuthorizedLinks/> : <UnauthorizedLinks/>}
-                </Box>
-                {currentUser &&
-                    <Typography variant="caption" component="div" sx={{ml: 2}}>
-                        {formatUserName(currentUser)}
-                    </Typography>
-                }
-            </Toolbar>
-        </AppBar>
+                <div className="flex items-center gap-4">
+                    <div className="flex items-center">
+                        {currentUser ? <AuthorizedLinks/> : <UnauthorizedLinks/>}
+                    </div>
+
+                    {currentUser && (
+                        <div className="text-sm text-primary-foreground/80 ml-2">
+                            {formatUserName(currentUser)}
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
     );
 };
 

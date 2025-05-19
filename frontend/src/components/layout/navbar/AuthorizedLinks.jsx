@@ -1,4 +1,4 @@
-import Button from "../../common/Button";
+import {Button} from "../../ui/button";
 import {NavLink, useNavigate} from "react-router-dom";
 import React, {useContext} from "react";
 import {AuthContext} from "../../../contexts/AuthContext";
@@ -25,14 +25,13 @@ const AuthorizedLinks = () => {
 
     return <>
         {currentUserLinks.map(link => <Button
-            color="inherit"
-            component={NavLink}
-            to={link.path}
+            variant="secondaryGhost"
+            asChild
         >
-            {link.label}
+            <NavLink to={link.path}>{link.label}</NavLink>
         </Button>)}
         <Button
-            color="inherit"
+            variant="secondaryGhost"
             onClick={handleLogout}
         >
             Logout

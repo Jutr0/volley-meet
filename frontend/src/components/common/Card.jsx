@@ -1,49 +1,37 @@
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import {Card as MUICard, CardContent, Stack} from "@mui/material";
-import Button from "./Button";
+import React from "react";
+import {
+  Card as ShadcnCard,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardFooter
+} from "../ui/card";
+import { Button } from "../ui/button";
 import LoadingWrapper from "../layout/LoadingWrapper";
 
-const Card = ({children, onDelete, onSave, title, buttons, loading}) => {
-    return <MUICard sx={{mx: 'auto'}}>
-        <Box
-            sx={{
-                px: 2,
-                py: 1.5,
-                borderBottom: '1px solid',
-                borderColor: 'divider',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-            }}
-        >
-            <Typography variant="h6">{title}</Typography>
+const Card = ({ children, onSave, title, buttons, loading }) => {
+  return (
+    <ShadcnCard className="h-full w-full">
+      <CardHeader className="border-b px-4 py-3 flex flex-row items-center justify-between space-y-0">
+        <CardTitle className="text-lg">{title}</CardTitle>
 
-            <Stack direction="row" spacing={1}>
-                {onDelete && <Button
-                    variant="outlined"
-                    size="small"
-                    color="error"
-                    onClick={onDelete}
-                >
-                    Delete
-                </Button>}
-                {onSave && <Button
-                    variant="contained"
-                    size="small"
-                    onClick={onSave}
-                >
-                    Save
-                </Button>}
-                {buttons}
-            </Stack>
-        </Box>
-        <LoadingWrapper loading={loading}>
-            <CardContent>
-                {children}
-            </CardContent>
-        </LoadingWrapper>
-    </MUICard>
-}
+        <div className="flex flex-row gap-2">
+          {onSave && (
+            <Button variant="default" onClick={onSave}>
+              Save
+            </Button>
+          )}
+          {buttons}
+        </div>
+      </CardHeader>
+
+      <LoadingWrapper loading={loading}>
+        <CardContent>
+          {children}
+        </CardContent>
+      </LoadingWrapper>
+    </ShadcnCard>
+  );
+};
 
 export default Card;

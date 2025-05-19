@@ -7,7 +7,6 @@ import {useNavigate, useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import * as Yup from "yup";
 import Table from "../../common/Table";
-import Typography from "@mui/material/Typography";
 import {formatUserName} from "../../../utils/formatters/user";
 
 const toApi = (resource) => ({
@@ -48,7 +47,10 @@ const Team = () => {
             captain: null
         },
         validationSchema,
-        onSubmit: values => actions.save(toApi(values)).then(res => navigate(`/superadmin/teams/${res.id}`))
+        onSubmit: values => actions.save(toApi(values)).then(res => {
+            setInitialValues(res);
+            navigate(`/superadmin/teams/${res.id}`)
+        })
     });
 
     useEffect(() => {
@@ -68,7 +70,7 @@ const Team = () => {
         <FormInput name="description" label="Description" formik={formik} multiline/>
         <FormAutocomplete name="captain" label="Captain" formik={formik} search={actions.searchUsers}
                           labelField='email'/>
-        <Typography>Members: </Typography>
+        <div>Members: </div>
         <Table
             data={formik.values.members || []}
             columns={membersColumns}

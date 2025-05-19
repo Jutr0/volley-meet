@@ -5,7 +5,6 @@ import * as Yup from 'yup';
 import FormInput from "../../common/form/FormInput";
 import FormSelect from "../../common/form/FormSelect";
 import FormCheckbox from "../../common/form/FormCheckbox";
-import Box from "@mui/material/Box";
 import {ROLES} from "../../../utils/constants";
 import * as _ from 'lodash';
 
@@ -67,7 +66,7 @@ const UserModal = ({onClose, user, onSave}) => {
             onSubmit={formik.handleSubmit}
             submitDisabled={formik.isSubmitting || !formik.isValid}
         >
-            <Box component="form" onSubmit={formik.handleSubmit} sx={{mt: 2}}>
+            <form onSubmit={formik.handleSubmit}>
                 <FormInput name="name" label="Name" formik={formik}/>
                 <FormInput name="surname" label="Surname" formik={formik}/>
                 <FormInput name="nickname" label="Nickname" formik={formik}/>
@@ -86,7 +85,7 @@ const UserModal = ({onClose, user, onSave}) => {
                     <FormInput name="password_confirmation" label="Password confirmation" type="password"
                                formik={formik}/>
                 </>}
-            </Box>
+            </form>
         </Modal>
     );
 };

@@ -3,7 +3,7 @@ import Table from "../common/Table";
 import _ from "lodash";
 import {buildActions, save} from "../../utils/actionsBuilder";
 import {useEffect, useState} from "react";
-import Button from "../common/Button";
+import {Button} from "../ui/button";
 
 const columns = [
     {field: 'team', headerName: 'Team', render: team => team.name},
@@ -40,10 +40,10 @@ const Invitations = () => {
         ))
     })
     const renderActions = (row) => row.status === 'pending' && <>
-        <Button color="success" variant="contained" onClick={() => handleAccept(row)}>
+        <Button variant="success" onClick={() => handleAccept(row)}>
             Accept
         </Button>
-        <Button color="error" variant="contained" onClick={() => handleDecline(row)}>
+        <Button variant="destructive" onClick={() => handleDecline(row)}>
             Decline
         </Button>
     </>

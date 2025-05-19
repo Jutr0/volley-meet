@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Box, Button} from '@mui/material';
+import {Box} from '@mui/material';
 import Table from '../../common/Table';
 import {buildActions} from "../../../utils/actionsBuilder";
 import {useNavigate} from "react-router-dom";
 import Card from "../../common/Card";
+import {Button} from "../../ui/button";
 
 const columns = [
     {field: 'name', headerName: 'Team Name', width: 250},
@@ -40,9 +41,7 @@ const Teams = () => {
     return (
         <Card title="Teams" buttons={
             <Button
-                variant="contained"
-                color="primary"
-                size="small"
+                size="sm"
                 onClick={handleAddNew}
             >
                 + Create

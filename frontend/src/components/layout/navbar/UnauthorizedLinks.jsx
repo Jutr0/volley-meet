@@ -1,4 +1,4 @@
-import Button from "../../common/Button";
+import {Button} from "../../ui/button";
 import {NavLink} from "react-router-dom";
 import React from "react";
 
@@ -6,18 +6,17 @@ const UnauthorizedLinks = () => {
 
     return <>
         <Button
-            color="inherit"
-            component={NavLink}
-            to="/login"
+            variant="ghost"
+            asChild
         >
-            Login
+            <NavLink to="/login"> Login</NavLink>
         </Button>
         <Button
-            color="inherit"
-            component={NavLink}
-            to="/register"
+
+            variant="ghost"
+            asChild
         >
-            Register
+            <NavLink to="/register"> Register</NavLink>
         </Button>
     </>
 }

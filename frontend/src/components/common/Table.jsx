@@ -12,7 +12,7 @@ import {
     TableRow,
     Typography
 } from '@mui/material';
-import Button from './Button';
+import {Button} from '../ui/button';
 
 const Table = ({
                    columns = [],
@@ -94,8 +94,8 @@ const Table = ({
                                             <Box sx={{display: 'flex', justifyContent: 'flex-end', gap: 1}}>
                                                 {onEdit && (
                                                     <Button
-                                                        size="small"
-                                                        color="primary"
+                                                        size="sm"
+                                                        variant="outline"
                                                         onClick={(e) => handleActionClick(e, onEdit, row)}
                                                     >
                                                         Edit
@@ -103,9 +103,8 @@ const Table = ({
                                                 )}
                                                 {onDelete && (
                                                     <Button
-                                                        size="small"
-                                                        variant="contained"
-                                                        color="error"
+                                                        size="sm"
+                                                        variant="destructive"
                                                         onClick={(e) => handleActionClick(e, onDelete, row)}
                                                     >
                                                         Delete

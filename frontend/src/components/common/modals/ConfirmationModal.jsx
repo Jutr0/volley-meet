@@ -1,8 +1,6 @@
 import React from 'react';
 import Modal from './Modal';
-import Button from '../Button';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import {Button} from '../../ui/button';
 
 const ConfirmationModal = ({
                                onConfirm,
@@ -11,7 +9,7 @@ const ConfirmationModal = ({
                                message,
                                item = "item",
                                confirmText = "Delete",
-                               confirmColor = "error",
+                               confirmColor = "destructive",
                                cancelText = "Cancel",
                                open = false
                            }) => {
@@ -34,24 +32,22 @@ const ConfirmationModal = ({
             title={title}
             actions={<>
                 <Button
-                    variant="outlined"
+                    variant="secondary"
                     onClick={handleCancel}
                 >
                     {cancelText}
                 </Button>
                 <Button
-                    variant="contained"
-                    color={confirmColor}
+                    variant={confirmColor}
                     onClick={handleConfirm}
                 >
                     {confirmText}
                 </Button>
             </>}
-            size="xs"
+            size="md"
         >
-            <Box sx={{mb: 3}}>
-                <Typography variant="body1">{message ? message : <Typography>Are you sure you want to delete <b>{item}</b>?</Typography>} </Typography>
-            </Box>
+            {message ? message :
+                <span>Are you sure you want to delete <b>{item}</b>?</span>}
 
         </Modal>
     );

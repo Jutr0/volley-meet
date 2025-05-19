@@ -8,6 +8,8 @@
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^7.0.2",
     "@mui/x-date-pickers": "^8.0.0-beta.3",
+    "@radix-ui/react-dialog": "^1.1.13",
+    "@radix-ui/react-navigation-menu": "^1.2.12",
     "@radix-ui/react-slot": "^1.2.2",
     "@tailwindcss/vite": "^4.1.7",
     "@testing-library/dom": "^10.4.0",

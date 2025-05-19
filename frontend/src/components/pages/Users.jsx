@@ -1,7 +1,7 @@
 import Table from "../common/Table";
 import {buildActions, save} from "../../utils/actionsBuilder";
 import {useEffect, useState} from "react";
-import Button from "../common/Button";
+import {Button} from "../ui/button";
 import UserModal from "../modals/users/UserModal";
 import Card from "../common/Card";
 import {formatUserName} from "../../utils/formatters/user";
@@ -49,7 +49,7 @@ const Users = () => {
 
     return (
         <Card title="Users"
-              buttons={<Button size="small" variant="contained" onClick={() => setSelectedUser({})}>
+              buttons={<Button size="sm" onClick={() => setSelectedUser({})}>
                   + Create
               </Button>}>
             <Table

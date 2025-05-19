@@ -1,16 +1,16 @@
 import Navbar from "./navbar/Navbar";
-import Box from "@mui/material/Box";
-import {Container} from "@mui/material";
 
 const Layout = ({children}) => {
-    return <Box>
+    return <div className="h-full">
         <Navbar/>
-        <Box component="main" sx={{py: 4}}>
-            <Container maxWidth="lg">
+        <div className="flex h-[calc(100%-64px)]">
+            <div className="w-[250px] shadow-md flex-shrink-0">
+            </div>
+            <div className="p-4 flex-grow overflow-auto">
                 {children}
-            </Container>
-        </Box>
-    </Box>
+            </div>
+        </div>
+    </div>
 }
 
 export default Layout;
