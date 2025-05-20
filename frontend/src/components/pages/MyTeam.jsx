@@ -1,7 +1,6 @@
 import Card from "../common/Card";
 import {get} from "../../utils/actionsBuilder";
 import React, {useContext, useEffect, useState} from "react";
-import Table from "../common/Table";
 import {formatUserName} from "../../utils/formatters/user";
 import Typography from "@mui/material/Typography";
 import {Box, Divider, Paper} from "@mui/material";
@@ -10,10 +9,13 @@ import ConfirmationModal from "../common/modals/ConfirmationModal";
 import {Button} from "../ui/button"
 import InvitationModal from "../modals/myTeam/InvitationModal";
 import {AuthContext} from "../../contexts/AuthContext";
+import {DataTable} from "../ui/data-table";
 
 const membersColumns = [
     {
-        field: 'id', headerName: 'User', render: (_, user) => formatUserName(user)
+        accessorKey: 'id', 
+        header: 'User', 
+        cell: ({ row }) => formatUserName(row.original)
     },
 ]
 
@@ -57,7 +59,7 @@ const MyTeam = () => {
                 </Typography>
                 <Divider sx={{mb: 2}}/>
 
-                <Table
+                <DataTable
                     data={team.members || []}
                     columns={membersColumns}
                     onDelete={currentUser.team.captain ? handleDeleteMember : null}

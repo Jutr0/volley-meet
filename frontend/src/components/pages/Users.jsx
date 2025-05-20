@@ -1,17 +1,19 @@
-import Table from "../common/Table";
 import {buildActions, save} from "../../utils/actionsBuilder";
 import {useEffect, useState} from "react";
 import {Button} from "../ui/button";
 import UserModal from "../modals/users/UserModal";
 import Card from "../common/Card";
 import {formatUserName} from "../../utils/formatters/user";
+import {DataTable} from "../ui/data-table.js";
 
 const columns = [
     {
-        field: 'id', headerName: 'User', render: (_, user) => formatUserName(user)
+        accessorKey: 'id', 
+        header: 'User', 
+        cell: ({ row }) => formatUserName(row.original)
     },
-    {field: 'email', headerName: 'Email'},
-    {field: 'role', headerName: 'Role'}
+    {accessorKey: 'email', header: 'Email'},
+    {accessorKey: 'role', header: 'Role'}
 ]
 
 const Users = () => {
@@ -52,7 +54,7 @@ const Users = () => {
               buttons={<Button size="sm" onClick={() => setSelectedUser({})}>
                   + Create
               </Button>}>
-            <Table
+            <DataTable
                 columns={columns}
                 data={users}
                 onEdit={setSelectedUser}

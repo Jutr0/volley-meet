@@ -1,14 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import {Box} from '@mui/material';
-import Table from '../../common/Table';
 import {buildActions} from "../../../utils/actionsBuilder";
 import {useNavigate} from "react-router-dom";
 import Card from "../../common/Card";
 import {Button} from "../../ui/button";
+import {DataTable} from "../../ui/data-table";
 
 const columns = [
-    {field: 'name', headerName: 'Team Name', width: 250},
-    {field: 'description', headerName: 'Description', width: 300},
+    {
+        accessorKey: 'name',
+        header: 'Team Name',
+    },
+    {
+        accessorKey: 'description',
+        header: 'Description',
+    },
 ];
 
 const Teams = () => {
@@ -50,12 +56,17 @@ const Teams = () => {
 
             </Box>
 
-            <Table
+            <DataTable
                 data={teams}
                 columns={columns}
-                loading={loading}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
+                isLoading={loading}
+                onRowAction={(row, action) => {
+                    if (action === 'edit') {
+                        handleEdit(row.original);
+                    } else if (action === 'delete') {
+                        handleDelete(row.original);
+                    }
+                }}
             />
         </Card>
     );

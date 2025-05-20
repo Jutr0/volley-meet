@@ -1,14 +1,10 @@
 import Card from "../common/Card";
-import Table from "../common/Table";
+import {DataTable} from "../ui/data-table";
 import _ from "lodash";
 import {buildActions, save} from "../../utils/actionsBuilder";
 import {useEffect, useState} from "react";
 import {Button} from "../ui/button";
 
-const columns = [
-    {field: 'team', headerName: 'Team', render: team => team.name},
-    {field: 'status', headerName: 'Status', render: status => _.startCase(status)},
-]
 const Invitations = () => {
 
     const [invitations, setInvitations] = useState([]);
@@ -39,17 +35,44 @@ const Invitations = () => {
             i.id === invitation.id ? {...i, status: 'declined'} : i
         ))
     })
-    const renderActions = (row) => row.status === 'pending' && <>
-        <Button variant="success" onClick={() => handleAccept(row)}>
-            Accept
-        </Button>
-        <Button variant="destructive" onClick={() => handleDecline(row)}>
-            Decline
-        </Button>
-    </>
+
+    const columns = [
+            {
+                accessorKey: 'team',
+                header: 'Team',
+                cell: ({ row }) => row.original.team.name
+            },
+            {
+                accessorKey: 'status',
+                header: 'Status',
+                cell: ({ row }) => _.startCase(row.original.status)
+            },
+            {
+                id: 'actions',
+                accessorKey: 'actions',
+                header: 'Actions',
+                cell: ({ row }) => {
+                    const invitation = row.original;
+                    return invitation.status === 'pending' && (
+                        <div className="flex space-x-2">
+                            <Button variant="success" onClick={() => handleAccept(invitation)}>
+                                Accept
+                            </Button>
+                            <Button variant="destructive" onClick={() => handleDecline(invitation)}>
+                                Decline
+                            </Button>
+                        </div>
+                );
+            }
+        }
+    ];
 
     return <Card title="Invitations">
-        <Table columns={columns} data={invitations} renderActions={renderActions} loading={loading}/>
+        <DataTable
+            columns={columns}
+            data={invitations}
+            isLoading={loading}
+        />
     </Card>
 }
 

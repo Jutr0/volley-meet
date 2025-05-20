@@ -6,7 +6,7 @@ import FormAutocomplete from "../../common/form/FormAutocomplete";
 import {useNavigate, useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import * as Yup from "yup";
-import Table from "../../common/Table";
+import {DataTable} from "../../ui/data-table";
 import {formatUserName} from "../../../utils/formatters/user";
 
 const toApi = (resource) => ({
@@ -25,7 +25,9 @@ const validationSchema = Yup.object({
 
 const membersColumns = [
     {
-        field: 'id', headerName: 'User', render: (_, user) => formatUserName(user)
+        accessorKey: 'id', 
+        header: 'User', 
+        cell: ({ row }) => formatUserName(row.original)
     },
 ]
 
@@ -71,10 +73,10 @@ const Team = () => {
         <FormAutocomplete name="captain" label="Captain" formik={formik} search={actions.searchUsers}
                           labelField='email'/>
         <div>Members: </div>
-        <Table
+        <DataTable
             data={formik.values.members || []}
             columns={membersColumns}
-            loading={false}
+            isLoading={false}
         />
     </Card>
     </>
