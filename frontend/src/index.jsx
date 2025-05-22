@@ -6,8 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import {appConfig} from "./config/applicationConfiguration";
 import axios from "axios";
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import {LocalizationProvider} from "@mui/x-date-pickers";
 import AuthProvider from "./contexts/AuthContext";
 
 axios.defaults.baseURL = appConfig.apiUrl
@@ -40,11 +38,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <BrowserRouter>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <AuthProvider>
                     <App/>
                 </AuthProvider>
-            </LocalizationProvider>
         </BrowserRouter>
     </React.StrictMode>
 );

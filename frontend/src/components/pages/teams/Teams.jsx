@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {Box} from '@mui/material';
 import {buildActions} from "../../../utils/actionsBuilder";
 import {useNavigate} from "react-router-dom";
 import Card from "../../common/Card";
@@ -52,10 +51,6 @@ const Teams = () => {
             >
                 + Create
             </Button>}>
-            <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2}}>
-
-            </Box>
-
             <DataTable
                 data={teams}
                 columns={columns}

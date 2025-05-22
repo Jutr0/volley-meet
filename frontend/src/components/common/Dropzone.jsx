@@ -1,7 +1,5 @@
-import {Paper} from "@mui/material";
 import {useDropzone} from "react-dropzone";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import {cn} from "@/lib/utils";
 
 const Dropzone = ({onDrop, multiple = false}) => {
     const {getRootProps, getInputProps, isDragActive} = useDropzone({
@@ -14,29 +12,25 @@ const Dropzone = ({onDrop, multiple = false}) => {
     });
 
     return (
-        <Paper
+        <div
             {...getRootProps()}
-            elevation={3}
-            sx={{
-                p: 4,
-                textAlign: 'center',
-                border: '2px dashed',
-                borderColor: isDragActive ? 'primary.main' : 'grey.400',
-                bgcolor: isDragActive ? 'grey.100' : 'background.paper',
-                cursor: 'pointer',
-                transition: '0.3s',
-            }}
+            className={cn(
+                "p-4 text-center border-2 border-dashed rounded-md shadow-md cursor-pointer transition-all duration-300",
+                isDragActive ? 
+                    "border-primary bg-gray-100" : 
+                    "border-gray-400 bg-background"
+            )}
         >
             <input {...getInputProps()} />
-            <Box>
-                <Typography variant="h6" color="textSecondary">
+            <div>
+                <h6 className="text-base font-medium text-gray-500">
                     {isDragActive ? 'Drop files here...' : 'Drag and drop files here or click to select'}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" sx={{mt: 1}}>
+                </h6>
+                <p className="text-sm text-gray-500 mt-1">
                     (Accepted files: .pdf, .jpg, .jpeg, .png)
-                </Typography>
-            </Box>
-        </Paper>
+                </p>
+            </div>
+        </div>
     );
 };
 

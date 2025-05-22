@@ -40,9 +40,9 @@ const InvitationModal = ({onClose, onInvite, team}) => {
 
     return <Modal open onClose={onClose} onSubmit={formik.handleSubmit} submitText="invite"
                   title={`Invite member - ${team.name}`}>
-        <Box component="form" sx={{mt: 2}}>
+        <form>
             <FormInput name="email" label="Email" type="email" formik={formik}/>
-        </Box>
+        </form>
     </Modal>
 }
 

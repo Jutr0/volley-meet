@@ -6,14 +6,13 @@ const UnauthorizedLinks = () => {
 
     return <>
         <Button
-            variant="ghost"
+            variant="secondaryGhost"
             asChild
         >
             <NavLink to="/login"> Login</NavLink>
         </Button>
         <Button
-
-            variant="ghost"
+            variant="secondaryGhost"
             asChild
         >
             <NavLink to="/register"> Register</NavLink>
